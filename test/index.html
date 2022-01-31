@@ -1,0 +1,145 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+
+    <!-- import mapbox library -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+
+    <!-- Import Mapbox GL Directions -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.2/mapbox-gl-directions.js"></script>
+    <link
+    rel="stylesheet"
+    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.2/mapbox-gl-directions.css"
+    type="text/css"
+    />
+    
+    <!-- Import Turf & Polyline -->
+    <script src="https://npmcdn.com/@turf/turf/turf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-polyline/1.1.1/polyline.js"></script>
+
+    <!-- Import geocoder -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css' type='text/css' />
+
+    <!-- Import Turf and Polyline -->
+    <script src="https://npmcdn.com/@turf/turf/turf.min.js"></script>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/mapbox-polyline/1.1.1/polyline.js></script>
+
+    <!-- import jquery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- import bootstrap library -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <!-- import bootstrap-icon -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+
+    <!--import custom js & css-->
+    <!-- <script src="main.js"></script> -->
+    <link href="main.css" rel="stylesheet" />
+  </head>
+  
+  <body>
+    <div id="_container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="http://localhost:8080/test/">
+          <!-- <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="green" class="bi bi-map" viewBox="0 0 18 18">
+            <path fill-rule="evenodd" d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103zM10 1.91l-4-.8v12.98l4 .8V1.91zm1 12.98 4-.8V1.11l-4 .8v12.98zm-6-.8V1.11l-4 .8v12.98l4-.8z"/>
+          </svg>  -->
+          <!-- <img src="http://localhost:8080/test/" alt="" width="24" height="24" class="d-inline-block align-text-top"> -->
+          PerthLam - MapBox (Beta) </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="https://www.landsd.gov.hk/en/index.html">Home</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li> -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Language
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="http://localhost:8080/test/">English</a></li>
+                  <!-- <li><hr class="dropdown-divider"></li> -->
+                  <li><a class="dropdown-item" href="http://localhost:8080/test/index_.html">Chinese</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Coming soon</a>
+              </li>
+            </ul>
+            
+            <select id="sort-item" onchange="options[selectedIndex].value&&self.location.reload(true)">
+              <option value=" " selected="selected">-- select filter --</option>
+              <option value="t_pop" data-sort="1">Population</option>
+              <option value="tlf_lf" data-sort="2">Labour Force</option>
+              <option value="lfpr_t" data-sort="3">Labour Force Participation rate</option>
+              <option value="ma_t" data-sort="4">Median Age</option>
+              <option value="mmearn_t" data-sort="5">Median Monthly Income (individual)</option>
+              <option value="dht" data-sort="6">Number of Domestic Household</option>
+              <option value="adhz" data-sort="7">Average Domestic Household Size</option>
+              <option value="ma_hh" data-sort="8">Median Monthly Domestic Household Income</option>
+            </select>
+          </div>
+        </div>
+      </nav>
+
+      <!--map container-->
+      <div id="map"></div>
+
+      <!-- Legend -->
+      <div class='map-overlay' id='legend'></div>
+
+      <!-- add sidebar -->
+      <div class='quakeInfo_R'>
+        <!-- <div><strong>ID:</strong> <span id='idd'></span></div>` -->
+        <div><strong>Location:</strong> <span id='loc_R'></span></div>
+        <div><strong>Population:</strong> <span id='pop_R'></span></div>
+        <div><strong>Labour Force:</strong> <span id='lab_R'></span></div>
+        <div><strong>Labour Force Participation rate:</strong> <span id='ratio_R'></span></div>
+        <div><strong>Median Age:</strong> <span id='med_R'></span></div>
+        <div><strong>Number of Domestic Household:</strong> <span id='dhti_R'></span></div>
+      </div>
+    
+      <div class='quakeInfo_L'>
+        <!-- <div><strong>ID:</strong> <span id='idd'></span></div>` -->
+        <div><strong>Location:</strong> <span id='loc'></span></div>
+        <div><strong>Population:</strong> <span id='pop'></span></div>
+        <div><strong>Labour Force:</strong> <span id='lab'></span></div>
+        <div><strong>Labour Force Participation rate:</strong> <span id='ratio'></span></div>
+        <div><strong>Median Age:</strong> <span id='med'></span></div>
+        <div><strong>Number of Domestic Household:</strong> <span id='dhti'></span></div>
+      </div>
+
+    </div>
+
+    <!-- <pre id="features"></pre> -->
+    
+    <!-- start to use mapbox -->
+    <script src="main.js"></script>
+    
+  </body>
+</html>
